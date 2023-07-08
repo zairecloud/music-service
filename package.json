@@ -1,0 +1,41 @@
+{
+  "name": "microservice-template",
+  "version": "1.0.0",
+  "description": "Template used for creating new microservices",
+  "main": "dist/index.js",
+  "author": "João Nunes",
+  "license": "ISC",
+  "scripts": {
+    "build-ts": "tsc",
+    "build-docker": "npm run build && docker build . -t $npm_package_name",
+    "clean-docker": "docker rm $(docker stop $(docker ps -a -q --filter ancestor=$npm_package_name  --format=\"{{.ID}}\")) && docker container prune -f",
+    "build": "npm run build-ts && npm run lint",
+    "debug": "npm run build && npm run watch-debug",
+    "lint": "tsc --noEmit && eslint \"**/*.{js,ts}\" --quiet --fix",
+    "serve-debug": "nodemon --inspect dist/index.js",
+    "serve-docker": "npm run build-docker && PORT=2000 docker run -p 2000:2000 -it $npm_package_name",
+    "serve": "node dist/index.js",
+    "start": "npm run serve",
+    "test": "jest --forceExit --coverage --verbose",
+    "watch-debug": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run serve-debug\"",
+    "watch-node": "nodemon dist/index.js",
+    "watch-test": "npm run test -- --watchAll",
+    "watch-ts": "tsc -w",
+    "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run watch-node\""
+  },
+  "devDependencies": {
+    "@types/eslint": "^8.44.0",
+    "@types/express": "^4.17.17",
+    "@types/jest": "^29.5.2",
+    "@typescript-eslint/eslint-plugin": "^5.61.0",
+    "@typescript-eslint/parser": "^5.61.0",
+    "concurrently": "^8.2.0",
+    "eslint": "^8.44.0",
+    "jest": "^29.6.1",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

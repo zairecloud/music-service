@@ -1,7 +1,7 @@
 {
-  "name": "microservice-template",
+  "name": "music-service",
   "version": "1.0.0",
-  "description": "Template used for creating new microservices",
+  "description": "Music microservice used for downloading music from various services (i.e.: YouTube, Apple Music, Bandcamp)",
   "main": "dist/index.js",
   "author": "João Nunes",
   "license": "ISC",

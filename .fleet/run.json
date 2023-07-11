@@ -1,0 +1,13 @@
+{
+    "configurations": [
+        {
+            "type": "npm",
+            "name": "debug",
+            "command": "run",
+            "commandArguments": ["debug"],
+            "environment": {
+                "PORT": "2000"
+            }
+        }
+    ]
+}

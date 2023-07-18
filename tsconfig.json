@@ -1,7 +1,12 @@
 {
 /* Reference: https://www.typescriptlang.org/tsconfig */
   "compilerOptions": {
+    /* Type Checking */
+    "strict": true,
+    
     /* Language and Environment */
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
     "target": "esnext",
       
     /* Modules */
@@ -18,6 +23,6 @@
     "forceConsistentCasingInFileNames": true,
       
     /* Completeness */
-    "skipLibCheck": true
+    "skipLibCheck": true,
   }
 }

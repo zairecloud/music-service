@@ -1,22 +1,15 @@
-import express from "express";
+import App from "./app";
+import config from "./config/default";
 
-const app = express();
-const port: number = parseInt(process.env.PORT) || 2000;
+import HealthController from "./controller/health.controller";
+import VersionController from "./controller/version.controller";
 
-app.get("/health", (req, res) => {
-	console.log("Health check requested");
-	res.json({
-		status: "Healthy"
-	});
-});
+const app = new App(
+	[
+		new HealthController(),
+		new VersionController()
+	],
+	config
+);
 
-app.get("/version", (req, res) => {
-	console.log("Version requested");
-	res.json({
-		version: process.env.npm_package_version
-	});
-});
-
-app.listen(port, () => {
-	return console.log(`Running on port ${port}`);
-});
+app.listen();
